@@ -1,0 +1,19 @@
+{
+  "Version": "v0.5.0",
+  "Type": 0,
+  "AccessRight": 1,
+  "DownloadUrl": null,
+  "InstallPath": "Assets/QFramework/Framework/0.Core/",
+  "DocUrl": "http://liangxiegame.com",
+  "Readme": {
+    "version": "v0.5.0",
+    "content": "Add Editor Kit",
+    "author": "liangxiegame@163.com",
+    "date": "2019 年 04 月 22 日 00:19",
+    "VersionNumber": 500
+  },
+  "Id": null,
+  "Name": "0.Core",
+  "VersionNumber": 500,
+  "FileName": "0.Core_v0.5.0.unitypackage"
+}

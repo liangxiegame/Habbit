@@ -1,0 +1,19 @@
+{
+  "Version": "0.1.1",
+  "Type": 0,
+  "AccessRight": 1,
+  "DownloadUrl": null,
+  "InstallPath": "Assets/QFramework/UIWidgets/",
+  "DocUrl": "http://liangxiegame.com",
+  "Readme": {
+    "version": "0.1.1",
+    "content": "添加大量的 API 封装支持",
+    "author": "liangxiegame@163.com",
+    "date": "2019 年 04 月 30 日 16:54",
+    "VersionNumber": 101
+  },
+  "Id": null,
+  "Name": "UIWidgets",
+  "VersionNumber": 101,
+  "FileName": "UIWidgets_0.1.1.unitypackage"
+}
