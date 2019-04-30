@@ -5,6 +5,13 @@
       "readme": {
         "items": [
           {
+            "version": "0.5.1",
+            "content": "add ToInt Support for float type",
+            "author": "liangxie",
+            "date": "2019 年 04 月 30 日 18:16",
+            "VersionNumber": 501
+          },
+          {
             "version": "v0.5.0",
             "content": "Add Editor Kit",
             "author": "liangxie",
@@ -21,6 +28,25 @@
         ]
       },
       "PackageVersions": [
+        {
+          "Version": "0.5.1",
+          "Type": 0,
+          "AccessRight": 1,
+          "DownloadUrl": "http://liangxiegame.com/media/0.Core_0.5.1.unitypackage",
+          "InstallPath": "Assets/QFramework/Framework/0.Core/",
+          "DocUrl": "http://liangxiegame.com",
+          "Readme": {
+            "version": "0.5.1",
+            "content": "add ToInt Support for float type",
+            "author": "liangxie",
+            "date": "2019 年 04 月 30 日 18:16",
+            "VersionNumber": 501
+          },
+          "Id": "634",
+          "Name": "0.Core",
+          "VersionNumber": 501,
+          "FileName": "0.Core_0.5.1.unitypackage"
+        },
         {
           "Version": "v0.5.0",
           "Type": 0,
@@ -60,13 +86,13 @@
           "FileName": "0.Core_v0.4.9.unitypackage"
         }
       ],
-      "Version": "v0.5.0",
-      "DownloadUrl": "http://liangxiegame.com/media/0.Core_v0.5.0.unitypackage",
+      "Version": "0.5.1",
+      "DownloadUrl": "http://liangxiegame.com/media/0.Core_0.5.1.unitypackage",
       "InstallPath": "Assets/QFramework/Framework/0.Core/",
       "DocUrl": "http://liangxiegame.com",
       "Type": 0,
       "AccessRight": 1,
-      "VersionNumber": 500,
+      "VersionNumber": 501,
       "Installed": true
     },
     {
@@ -6862,6 +6888,13 @@
       "readme": {
         "items": [
           {
+            "version": "0.1.1",
+            "content": "添加大量的 API 封装支持",
+            "author": "liangxie",
+            "date": "2019 年 04 月 30 日 16:54",
+            "VersionNumber": 101
+          },
+          {
             "version": "v0.0.1",
             "content": "framework version",
             "author": "liangxie",
@@ -6871,6 +6904,25 @@
         ]
       },
       "PackageVersions": [
+        {
+          "Version": "0.1.1",
+          "Type": 0,
+          "AccessRight": 1,
+          "DownloadUrl": "http://liangxiegame.com/media/UIWidgets_0.1.1.unitypackage",
+          "InstallPath": "Assets/QFramework/UIWidgets/",
+          "DocUrl": "http://liangxiegame.com",
+          "Readme": {
+            "version": "0.1.1",
+            "content": "添加大量的 API 封装支持",
+            "author": "liangxie",
+            "date": "2019 年 04 月 30 日 16:54",
+            "VersionNumber": 101
+          },
+          "Id": "633",
+          "Name": "UIWidgets",
+          "VersionNumber": 101,
+          "FileName": "UIWidgets_0.1.1.unitypackage"
+        },
         {
           "Version": "v0.0.1",
           "Type": 0,
@@ -6891,13 +6943,13 @@
           "FileName": "UIWidgets_v0.0.1.unitypackage"
         }
       ],
-      "Version": "v0.0.1",
-      "DownloadUrl": "http://liangxiegame.com/media/UIWidgets_v0.0.1.unitypackage",
+      "Version": "0.1.1",
+      "DownloadUrl": "http://liangxiegame.com/media/UIWidgets_0.1.1.unitypackage",
       "InstallPath": "Assets/QFramework/UIWidgets/",
       "DocUrl": "http://liangxiegame.com",
       "Type": 0,
       "AccessRight": 1,
-      "VersionNumber": 1,
+      "VersionNumber": 101,
       "Installed": true
     },
     {

@@ -1231,6 +1231,11 @@ namespace QFramework
             return int.TryParse(selfStr, out retValue) ? retValue : defaulValue;
         }
 
+        public static int ToInt(this float selfFloat)
+        {
+            return (int) selfFloat;
+        }
+
         public static DateTime ToDateTime(this string selfStr, DateTime defaultValue = default(DateTime))
         {
             var retValue = defaultValue;
