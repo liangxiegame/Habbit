@@ -1,0 +1,19 @@
+{
+  "Version": "0.1.1",
+  "Type": 0,
+  "AccessRight": 0,
+  "DownloadUrl": null,
+  "InstallPath": "Assets/QFramework/UIWidgetsReduxPersist/",
+  "DocUrl": "http://liangxiegame.com",
+  "Readme": {
+    "version": "0.1.1",
+    "content": "初步提交",
+    "author": "liangxiegame@163.com",
+    "date": "2019 年 05 月 01 日 18:30",
+    "VersionNumber": 101
+  },
+  "Id": null,
+  "Name": "UIWidgetsReduxPersist",
+  "VersionNumber": 101,
+  "FileName": "UIWidgetsReduxPersist_0.1.1.unitypackage"
+}

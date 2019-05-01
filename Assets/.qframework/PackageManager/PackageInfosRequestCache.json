@@ -6953,6 +6953,49 @@
       "Installed": true
     },
     {
+      "Name": "UIWidgetsReduxPersist",
+      "readme": {
+        "items": [
+          {
+            "version": "0.1.1",
+            "content": "初步提交",
+            "author": "liangxie",
+            "date": "2019 年 05 月 01 日 18:30",
+            "VersionNumber": 101
+          }
+        ]
+      },
+      "PackageVersions": [
+        {
+          "Version": "0.1.1",
+          "Type": 0,
+          "AccessRight": 0,
+          "DownloadUrl": "http://liangxiegame.com/media/UIWidgetsReduxPersist_0.1.1.unitypackage",
+          "InstallPath": "Assets/QFramework/UIWidgetsReduxPersist/",
+          "DocUrl": "http://liangxiegame.com",
+          "Readme": {
+            "version": "0.1.1",
+            "content": "初步提交",
+            "author": "liangxie",
+            "date": "2019 年 05 月 01 日 18:30",
+            "VersionNumber": 101
+          },
+          "Id": "635",
+          "Name": "UIWidgetsReduxPersist",
+          "VersionNumber": 101,
+          "FileName": "UIWidgetsReduxPersist_0.1.1.unitypackage"
+        }
+      ],
+      "Version": "0.1.1",
+      "DownloadUrl": "http://liangxiegame.com/media/UIWidgetsReduxPersist_0.1.1.unitypackage",
+      "InstallPath": "Assets/QFramework/UIWidgetsReduxPersist/",
+      "DocUrl": "http://liangxiegame.com",
+      "Type": 0,
+      "AccessRight": 0,
+      "VersionNumber": 101,
+      "Installed": true
+    },
+    {
       "Name": "Unfinity Games",
       "readme": {
         "items": [
