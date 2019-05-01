@@ -1,4 +1,5 @@
-﻿using Unity.UIWidgets;
+﻿using LearnUIWidgets;
+using Unity.UIWidgets;
 using Unity.UIWidgets.engine;
 using Unity.UIWidgets.material;
 using Unity.UIWidgets.painting;
@@ -6,14 +7,25 @@ using Unity.UIWidgets.Redux;
 using Unity.UIWidgets.service;
 using Unity.UIWidgets.ui;
 using Unity.UIWidgets.widgets;
+using UnityEngine;
+using Color = Unity.UIWidgets.ui.Color;
 
 namespace HabitApp
 {
     public class App : UIWidgetsPanel
     {
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            FontManager.instance.addFont(Resources.Load<Font>("MaterialIcons-Regular"), "Material Icons");
+        }
+
         protected override Widget createWidget()
         {
-            var store = new Store<AppState>(reducer: AppReducer.Reduce, initialState: new AppState());
+            var store = new Store<AppState>(
+                reducer: AppReducer.Reduce, 
+                initialState: AppState.Load(),
+                ReduxPersistMiddleware.create<AppState>());
 
             return new StoreProvider<AppState>(store: store,
                 child: new MaterialApp(

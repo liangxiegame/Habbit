@@ -61,7 +61,16 @@ namespace HabitApp
                                     }
                                     else
                                     {
-                                        return new Text("待处理");
+                                        return new CustomScrollView(
+                                            physics: new NeverScrollableScrollPhysics(),
+                                            slivers: new List<Widget>()
+                                            {
+                                                new SliverToBoxAdapter(child: new Tasks(context1)),
+                                                new SliverToBoxAdapter(
+                                                    child: new Habits(habitsHeight)
+                                                )
+                                            }
+                                        );
                                     }
                                 })
                         );
