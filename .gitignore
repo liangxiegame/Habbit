@@ -1,0 +1,8 @@
+Library/
+*.csproj
+Habbit.sln.DotSettings.user
+Habbit.sln
+obj/
+Temp/
+Logs/
+.idea/
