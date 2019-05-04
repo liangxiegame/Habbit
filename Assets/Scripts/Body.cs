@@ -51,10 +51,10 @@ namespace HabitApp
                                     onPressed:
                                     () =>
                                     {
-                                        dispatcher.dispatch(new AddHabitAction(new HabitData()
-                                        {
-                                            Title = "新的习惯"
-                                        }));
+                                        Navigator.push(context, new MaterialPageRoute(
+                                            builder: (context1 => { return new HabitEditor(); })
+                                        ));
+
                                     }
                                 )
                             )

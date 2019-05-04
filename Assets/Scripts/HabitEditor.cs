@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Unity.UIWidgets.material;
 using Unity.UIWidgets.Redux;
 using Unity.UIWidgets.widgets;
-using UnityEngine;
 
 namespace HabitApp
 {
@@ -10,7 +9,9 @@ namespace HabitApp
     {
         public HabitData Habit;
 
-        public HabitEditor(HabitData habit)
+        public bool CreateMode => Habit == null;
+
+        public HabitEditor(HabitData habit = null)
         {
             Habit = habit;
         }
@@ -36,11 +37,11 @@ namespace HabitApp
                                     icon:new Icon(Icons.arrow_back),
                                     onPressed:() => { Navigator.pop(context); }
                                     ),
-                                title: new Text("Habit Editor"),
+                                title: new Text(widget.CreateMode ? "New Habit" : "Edit Habit"),
                                 actions: new List<Widget>()
                                 {
                                     new FlatButton(
-                                        child: new Text("Delete"),
+                                        child: new Text(widget.CreateMode ? "" :"Delete"),
                                         onPressed: () =>
                                         {
                                             dispatcher.dispatch(new DeleteHabitAction(widget.Habit));
@@ -50,12 +51,23 @@ namespace HabitApp
                                 }
                             ),
                             body:new TextField(
-                                controller:new TextEditingController(widget.Habit.Title),
+                                controller:new TextEditingController(widget.CreateMode ? string.Empty : widget.Habit.Title),
                                 onSubmitted:(value =>
                                 {
-                                    if (value != widget.Habit.Title)
+                                    if (widget.CreateMode)
                                     {
-                                        dispatcher.dispatch(new UpdateHabitAction(widget.Habit, value));
+                                        dispatcher.dispatch(new AddHabitAction(new HabitData()
+                                        {
+                                            Title = value
+                                        }));
+                                    }
+                                    else
+                                    {
+
+                                        if (value != widget.Habit.Title)
+                                        {
+                                            dispatcher.dispatch(new UpdateHabitAction(widget.Habit, value));
+                                        }
                                     }
 
                                     Navigator.pop(context);
