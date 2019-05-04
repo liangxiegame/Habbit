@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.UIWidgets.material;
 using Unity.UIWidgets.painting;
+using Unity.UIWidgets.Redux;
 using Unity.UIWidgets.widgets;
 
 namespace HabitApp
@@ -16,37 +17,50 @@ namespace HabitApp
 
     class BodyState : State<Body>
     {
-        List<string> mHabits = new List<string>();
-
         public override Widget build(BuildContext context)
         {
-            return
-                new Column(
-                    children: new List<Widget>()
-                    {
-                        new Container(
-                            color: Colors.grey,
-                            height: 200,
-                            child: new ListView(
-                                children: mHabits.Select(habit => new Habit(habit, () =>
-                                {
-                                    this.setState(() => { mHabits.Remove(habit); });
-                                    
-                                }) as Widget)
-                                    .ToList()
-                            )
-                        ),
-                        new Container(
-                            alignment: Alignment.center,
-                            child: new FlatButton(
-                                color: Colors.blue,
-                                child: new Text("创建习惯", style: new TextStyle(color: Colors.white)),
-                                onPressed:
-                                () => { this.setState(() => { mHabits.Add("新的习惯"); }); }
-                            )
-                        )
-                    }
+            return new StoreConnector<AppState,List<HabitData>>(
+                converter:state=>state.Habits,
+                builder:(buildContext, model, dispatcher) =>
+                {
+                    return new Column(
+                        children: new List<Widget>()
+                        {
+                            new Container(
+                                color: Colors.grey,
+                                height: 200,
+                                child: new ListView(
+                                    children: model.Select(habit => new Habit(habit, () =>
+                                        {
+//                                    this.setState(() => { mHabits.Remove(habit); });
+                                            Navigator.push(context,
+                                                new MaterialPageRoute(buildContext1 =>
+                                                {
+                                                    return new HabitEditor(habit);
+                                                }));
 
+                                        }) as Widget)
+                                        .ToList()
+                                )
+                            ),
+                            new Container(
+                                alignment: Alignment.center,
+                                child: new FlatButton(
+                                    color: Colors.blue,
+                                    child: new Text("创建习惯", style: new TextStyle(color: Colors.white)),
+                                    onPressed:
+                                    () =>
+                                    {
+                                        dispatcher.dispatch(new AddHabitAction(new HabitData()
+                                        {
+                                            Title = "新的习惯"
+                                        }));
+                                    }
+                                )
+                            )
+                        }
+                    );
+                }
                 );
         }
     }
