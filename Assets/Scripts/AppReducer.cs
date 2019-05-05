@@ -8,6 +8,11 @@ namespace HabitApp
         {
             switch (action)
             {
+                case SelectHabitAction selectHabitAction:
+
+                    previousState.SelectedHabitIndex = selectHabitAction.HabitIndex;
+
+                    return previousState;
                 case UpdateHabitAction updateHabitAction:
                     updateHabitAction.Habit.Title = updateHabitAction.NewTitle;
                     return previousState;
@@ -16,9 +21,28 @@ namespace HabitApp
                     return previousState;
                 case AddHabitAction addHabitAction:
                     previousState.Habits.Add(addHabitAction.Habit);
-                    return previousState;  
+                    return previousState;
+                case ChangeTaskStatusAction changeTaskStatusAction:
+
+                    var status = changeTaskStatusAction.TaskData.Status;
+                    var task = changeTaskStatusAction.TaskData;
+
+                    if (status == TaskStatus.Completed)
+                    {
+                        task.Status = TaskStatus.Failed;
+                    }
+                    else if (status == TaskStatus.Failed)
+                    {
+                        task.Status = TaskStatus.Skipped;
+                    }
+                    else if (status == TaskStatus.Skipped || status == null)
+                    {
+                        task.Status = TaskStatus.Completed;
+                    }
+
+                    return previousState;
             }
-            
+
             return previousState;
         }
     }

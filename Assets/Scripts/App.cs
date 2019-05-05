@@ -27,7 +27,7 @@ namespace HabitApp
                 child: new MaterialApp(
                     home: new Scaffold(
                         appBar: new AppBar(
-                            title: new Text("Title")
+                            title: new Title()
                         ),
                         body: new Body()
                     )

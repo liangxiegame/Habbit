@@ -1,15 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HabitApp
 {
     public class HabitData
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
-
+        
         public string Title { get; set; } = string.Empty;
 
-        public List<TaskStatus> Tasks = new List<TaskStatus>();
+        public List<TaskData> Tasks = Enumerable.Range(1, 81)
+            .Select(index => new TaskData()
+            {
+                Seq = index
+            }).ToList();
+
+        public DateTime CreateAt = DateTime.Now;
     }
 
     /// <summary>
@@ -40,5 +47,10 @@ namespace HabitApp
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         public TaskStatus? Status { get; set; } = null;
+        
+        /// <summary>
+        /// 序列
+        /// </summary>
+        public int Seq { get; set; }
     }
 }

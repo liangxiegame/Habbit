@@ -1,5 +1,27 @@
 namespace HabitApp
 {
+    public class SelectHabitAction
+    {
+        public int HabitIndex;
+
+        public SelectHabitAction(int habitIndex)
+        {
+            HabitIndex = habitIndex;
+        }
+    }
+
+
+    public class ChangeTaskStatusAction
+    {
+        public TaskData TaskData;
+
+        public ChangeTaskStatusAction(TaskData taskData)
+        {
+            TaskData = taskData;
+        }
+    }
+    
+    
     public class DeleteHabitAction
     {
         public HabitData Habit;

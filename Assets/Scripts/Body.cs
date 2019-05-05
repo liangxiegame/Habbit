@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using com.unity.uiwidgets.Runtime.rendering;
@@ -21,8 +22,8 @@ namespace HabitApp
     {
         public override Widget build(BuildContext context)
         {
-            return new StoreConnector<AppState, List<HabitData>>(
-                converter: state => state.Habits,
+            return new StoreConnector<AppState, AppState>(
+                converter: state => state,
                 builder: (buildContext, model, dispatcher) =>
                 {
 
@@ -34,17 +35,39 @@ namespace HabitApp
                                 var tasksHeight = MediaQuery.of(context).size.width;
                                 var habitsHeight = totalHeight - tasksHeight;
 
+                                var selectedHabit = model.Habits[model.SelectedHabitIndex];
+                                var tasks = selectedHabit.Tasks;
+
+
+                                var totalDays = (DateTime.Now - selectedHabit.CreateAt).TotalDays;
+                                var dayth = (int) totalDays + 1;
+
+                                var itemWidth = tasksHeight / 5;
+                                
                                 return new Column(
                                     children: new List<Widget>()
                                     {
                                         new Container(
                                             height: tasksHeight,
-                                            color: Colors.green,
+                                            color: Colors.black,
                                             child: GridView.builder(
                                                 gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                                                     crossAxisCount: 5
                                                 ),
-                                                itemBuilder: ((context3, index) => { return new Text("item"); }),
+                                                itemBuilder: ((context3, index) =>
+                                                {
+                                                    var task = tasks[index];
+                                                    var isToday = dayth == task.Seq;
+                                                    
+                                                    return new Task(task, () =>
+                                                    {
+                                                        Debug.Log("Task Clicked");
+
+                                                        dispatcher.dispatch(new ChangeTaskStatusAction(task));
+
+                                                    },itemWidth,isToday); 
+                               
+                                                }),
                                                 itemCount: 25
                                             )
                                         ),
@@ -56,18 +79,22 @@ namespace HabitApp
                                                     crossAxisCount: 2,
                                                     childAspectRatio: 1.5f
                                                 ),
-                                                itemCount: model.Count,
+                                                itemCount: model.Habits.Count,
                                                 itemBuilder: (context2, index) =>
                                                 {
-                                                    return new Habit(model[index], () =>
+                                                    var habit = model.Habits[index];
+                                                    var selected = model.SelectedHabitIndex == index;
+                                                    
+                                                    return new Habit(habit,selected,  () =>
                                                     {
-                    //                                    this.setState(() => { mHabits.Remove(habit); });
+                                                       dispatcher.dispatch(new SelectHabitAction(index));
+                                                    }, () =>
+                                                    {
                                                         Navigator.push(context,
                                                             new MaterialPageRoute(buildContext1 =>
                                                             {
-                                                                return new HabitEditor(model[index]);
+                                                                return new HabitEditor(habit);
                                                             }));
-
                                                     });
                                                 }
 
