@@ -58,6 +58,7 @@ namespace HabitApp
                                                 {
                                                     var task = tasks[index];
                                                     var isToday = dayth == task.Seq;
+                                                    var editable = dayth == task.Seq || dayth == task.Seq + 1;
                                                     
                                                     return new Task(task, () =>
                                                     {
@@ -65,41 +66,16 @@ namespace HabitApp
 
                                                         dispatcher.dispatch(new ChangeTaskStatusAction(task));
 
-                                                    },itemWidth,isToday); 
+                                                    },itemWidth,isToday,editable); 
                                
                                                 }),
                                                 itemCount: 25
                                             )
                                         ),
                                         new Container(
-                                            color: Colors.grey,
+                                            color: Colors.black,
                                             height: habitsHeight,
-                                            child: GridView.builder(
-                                                gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 2,
-                                                    childAspectRatio: 1.5f
-                                                ),
-                                                itemCount: model.Habits.Count,
-                                                itemBuilder: (context2, index) =>
-                                                {
-                                                    var habit = model.Habits[index];
-                                                    var selected = model.SelectedHabitIndex == index;
-                                                    
-                                                    return new Habit(habit,selected,  () =>
-                                                    {
-                                                       dispatcher.dispatch(new SelectHabitAction(index));
-                                                    }, () =>
-                                                    {
-                                                        Navigator.push(context,
-                                                            new MaterialPageRoute(buildContext1 =>
-                                                            {
-                                                                return new HabitEditor(habit);
-                                                            }));
-                                                    });
-                                                }
-
-                                            )
-                                        ),
+                                            child: new Habits()),
                                         new Container(
                                             alignment: Alignment.center,
                                             child: new FlatButton(

@@ -8,15 +8,17 @@ namespace HabitApp
     public class Task : StatefulWidget
     {
         public bool     IsToday { get; }
+        public bool Editable { get; }
         public TaskData TaskData;
 
         public Action OnClick;
 
         public float Width;
 
-        public Task(TaskData taskData, Action onClick, float width, bool isToday)
+        public Task(TaskData taskData, Action onClick, float width, bool isToday, bool editable)
         {
             IsToday = isToday;
+            Editable = editable;
             TaskData = taskData;
             OnClick = onClick;
             Width = width;
@@ -75,7 +77,10 @@ namespace HabitApp
                 onTapDown: details => { },
                 onTapUp: details =>
                 {
-                    widget.OnClick();
+                    if (widget.Editable)
+                    {
+                        widget.OnClick();
+                    }
                 },
                 onTapCancel: () => { },
                 child: new Container(
