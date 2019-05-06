@@ -1,5 +1,6 @@
 using com.unity.uiwidgets.Runtime.rendering;
 using Unity.UIWidgets.material;
+using Unity.UIWidgets.painting;
 using Unity.UIWidgets.Redux;
 using Unity.UIWidgets.widgets;
 
@@ -20,7 +21,7 @@ namespace HabitApp
         {
             var screenWidth = MediaQuery.of(context).size.width;
             var itemWidth = (screenWidth - 3 * Padding) / 2;
-            var aspect = itemWidth / ItemHeight;
+            var aspect = (itemWidth + Padding )/ (ItemHeight  + Padding);
             
             
             return new StoreConnector<AppState, AppState>(
@@ -32,18 +33,27 @@ namespace HabitApp
                             crossAxisCount: 2,
                             childAspectRatio: aspect
                         ),
-                        itemCount: model.Habits.Count,
+                        itemCount: model.Habits.Count + 1,
                         itemBuilder: (context2, index) =>
                         {
-                            var habit = model.Habits[index];
-                            var selected = model.SelectedHabitIndex == index;
+      
+                            if (index == model.Habits.Count)
+                            {
+                                return new AddHabit(itemWidth);
+                            }
+                            else
+                            {
+                                var habit = model.Habits[index];
+                                var selected = model.SelectedHabitIndex == index;
 
-                            return new Habit(habit, selected,
-                                () => { dispatcher.dispatch(new SelectHabitAction(index)); }, () =>
-                                {
-                                    Navigator.push(context,
-                                        new MaterialPageRoute(buildContext1 => { return new HabitEditor(habit); }));
-                                },itemWidth);
+                                
+                                return new Habit(habit, selected,
+                                    () => { dispatcher.dispatch(new SelectHabitAction(index)); }, () =>
+                                    {
+                                        Navigator.push(context,
+                                            new MaterialPageRoute(buildContext1 => { return new HabitEditor(habit); }));
+                                    }, itemWidth);
+                            }
                         }
 
                     );

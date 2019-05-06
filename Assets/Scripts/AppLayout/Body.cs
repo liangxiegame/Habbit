@@ -73,23 +73,10 @@ namespace HabitApp
                                             )
                                         ),
                                         new Container(
+                                            padding:EdgeInsets.symmetric(horizontal:Habits.Padding / 2,vertical:Habits.Padding / 2),
                                             color: Colors.black,
                                             height: habitsHeight,
-                                            child: new Habits()),
-                                        new Container(
-                                            alignment: Alignment.center,
-                                            child: new FlatButton(
-                                                color: Colors.blue,
-                                                child: new Text("创建习惯", style: new TextStyle(color: Colors.white)),
-                                                onPressed:
-                                                () =>
-                                                {
-                                                    Navigator.push(context, new MaterialPageRoute(
-                                                        builder: (context2 => { return new HabitEditor(); })
-                                                    ));
-                                                }
-                                            )
-                                        )
+                                            child: new Habits())
                                     }
                                 );
                             })
