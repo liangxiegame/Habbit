@@ -25,7 +25,9 @@ namespace HabitApp
         {
             var jsonContent = PlayerPrefs.GetString("SAVE_MIDDLEWARE",string.Empty);
 
+            
             AppState initialAppState = null;
+
             
             if (string.IsNullOrEmpty(jsonContent))
             {
@@ -47,6 +49,7 @@ namespace HabitApp
             
             var store = new Store<AppState>(AppReducer.Reduce, 
                 initialState: initialAppState,
+                ReduxLogging.create<AppState>(),
                 SaveMiddleware.create<AppState>());
 
             return new StoreProvider<AppState>(
