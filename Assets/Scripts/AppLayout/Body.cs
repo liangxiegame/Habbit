@@ -35,13 +35,6 @@ namespace HabitApp
                                 var tasksHeight = MediaQuery.of(context).size.width;
                                 var habitsHeight = totalHeight - tasksHeight;
 
-                                var selectedHabit = model.Habits[model.SelectedHabitIndex];
-                                var tasks = selectedHabit.Tasks;
-
-
-                                var totalDays = (DateTime.Now - selectedHabit.CreateAt).TotalDays;
-                                var dayth = (int) totalDays + 1;
-
                                 var itemWidth = tasksHeight / 5;
                                 
                                 return new Column(
@@ -50,27 +43,8 @@ namespace HabitApp
                                         new Container(
                                             height: tasksHeight,
                                             color: Colors.black,
-                                            child: GridView.builder(
-                                                gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 5
-                                                ),
-                                                itemBuilder: ((context3, index) =>
-                                                {
-                                                    var task = tasks[index];
-                                                    var isToday = dayth == task.Seq;
-                                                    var editable = dayth == task.Seq || dayth == task.Seq + 1;
-                                                    
-                                                    return new Task(task, () =>
-                                                    {
-                                                        Debug.Log("Task Clicked");
-
-                                                        dispatcher.dispatch(new ChangeTaskStatusAction(task));
-
-                                                    },itemWidth,isToday,editable); 
-                               
-                                                }),
-                                                itemCount: 25
-                                            )
+                                            // TODO: 封装成 Tasks
+                                            child: new Tasks(itemWidth)
                                         ),
                                         new Container(
                                             padding:EdgeInsets.symmetric(horizontal:Habits.Padding / 2,vertical:Habits.Padding / 2),

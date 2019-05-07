@@ -11,7 +11,9 @@ namespace HabitApp
                 converter:state => state,
                 builder: (buildContext, model, dispatcher) =>
                 {
-                    return new Text(model.Habits[model.SelectedHabitIndex].Title);
+                    var title = model.SelectedHabit != null ? model.SelectedHabit.Title : "Create Habit";
+                    
+                    return new Text(title);
                 }
             );
         }

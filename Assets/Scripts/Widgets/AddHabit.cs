@@ -17,8 +17,7 @@ namespace HabitApp
         }
 
         public override Widget build(BuildContext context)
-        {
-
+        { 
             return new GestureDetector(
                 onTap: () =>
                 {
@@ -28,6 +27,7 @@ namespace HabitApp
                 },
                 child: new Container(
                     width: mHabitWidth,
+                    height:50 + Habits.Padding,
                     padding: EdgeInsets.only(left: 5, top: 3, bottom: 2, right: 5),
                     margin: EdgeInsets.symmetric(horizontal: Habits.Padding / 2, vertical: Habits.Padding / 2),
                     decoration: new BoxDecoration(
