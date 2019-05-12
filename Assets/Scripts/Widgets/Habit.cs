@@ -17,17 +17,14 @@ namespace HabitApp
         private Action mOnClick;
 
         private Action mOnEdit;
-
-        private bool mSelected = false;
-
+        
         private float mHabitWidth;
 
-        public Habit(HabitData habit, bool selected, Action onClick, Action onEdit, float habitWidth)
+        public Habit(HabitData habit, Action onClick, Action onEdit, float habitWidth)
         {
             mHabit = habit;
             mOnClick = onClick;
             mOnEdit = onEdit;
-            mSelected = selected;
             mHabitWidth = habitWidth;
         }
 
@@ -40,7 +37,7 @@ namespace HabitApp
                     padding: EdgeInsets.only(left: 5, top: 3, bottom: 2, right: 5),
                     margin: EdgeInsets.symmetric(horizontal: Habits.Padding / 2, vertical: Habits.Padding / 2),
                     decoration: new BoxDecoration(
-                        color: mSelected ? Colors.blue : Colors.white10,
+                        color: mHabit.Selected ? Colors.blue : Colors.white10,
                         borderRadius: BorderRadius.all(Radius.circular(4))
                     ),
                     child: new Column(

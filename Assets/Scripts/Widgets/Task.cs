@@ -7,18 +7,14 @@ namespace HabitApp
 {
     public class Task : StatefulWidget
     {
-        public bool     IsToday { get; }
-        public bool Editable { get; }
         public TaskData TaskData;
 
         public Action OnClick;
 
         public float Width;
 
-        public Task(TaskData taskData, Action onClick, float width, bool isToday, bool editable)
+        public Task(TaskData taskData, Action onClick, float width)
         {
-            IsToday = isToday;
-            Editable = editable;
             TaskData = taskData;
             OnClick = onClick;
             Width = width;
@@ -43,11 +39,11 @@ namespace HabitApp
 
             bool showIcon = false;
 
-            if (status == null)
+            if (status == TaskStatus.UnSetted)
             {
                 text = widget.TaskData.Seq.ToString();
 
-                if (widget.IsToday)
+                if (widget.TaskData.IsToday.Value)
                 {
                     textColor = Colors.black;
                     circleColor = Colors.white;
@@ -63,7 +59,7 @@ namespace HabitApp
             }
             else if (status == TaskStatus.Failed)
             {
-                icon = Icons.cancel;
+                icon = Icons.close;
                 circleColor = Colors.red;
                 showIcon = true;
             }
@@ -73,11 +69,16 @@ namespace HabitApp
                 circleColor = Colors.green;
             }
 
+            if (widget.TaskData.IsFuture.Value)
+            {
+                textColor = Colors.white70;
+            }
+
             return new GestureDetector(
                 onTapDown: details => { },
                 onTapUp: details =>
                 {
-                    if (widget.Editable)
+                    if (widget.TaskData.IsToday.Value || widget.TaskData.IsYesterday.Value)
                     {
                         widget.OnClick();
                     }
@@ -91,8 +92,8 @@ namespace HabitApp
                     ),
                     alignment: Alignment.center,
                     child: !showIcon
-                        ? new Text(text, style: new TextStyle(color: textColor)) as Widget
-                        : new Icon(icon))
+                        ? new Text(text, style: new TextStyle(color: textColor,fontSize:widget.Width / 2.5f)) as Widget
+                        : new Icon(icon,color:Colors.white,size:widget.Width / 2))
             );
         }
     }

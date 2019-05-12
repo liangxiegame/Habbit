@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using com.unity.uiwidgets.Runtime.rendering;
 using Unity.UIWidgets.material;
 using Unity.UIWidgets.painting;
 using Unity.UIWidgets.Redux;
+using Unity.UIWidgets.ui;
 using Unity.UIWidgets.widgets;
-using UnityEngine;
+using Color = Unity.UIWidgets.ui.Color;
 
 namespace HabitApp
 {
@@ -22,42 +20,74 @@ namespace HabitApp
     {
         public override Widget build(BuildContext context)
         {
-            return new StoreConnector<AppState, AppState>(
+            return new Container(
+                decoration:new BoxDecoration(
+                    color:new Color(0xFF111111)),
+                child:new StoreConnector<AppState, AppState>(
                 converter: state => state,
                 builder: (buildContext, model, dispatcher) =>
                 {
-
                     return new SafeArea(
                         child: new LayoutBuilder(
-                            builder: ((context1, constraints) =>
+                            builder: (context1, constraints) =>
                             {
                                 var totalHeight = constraints.maxHeight;
                                 var tasksHeight = MediaQuery.of(context).size.width;
                                 var habitsHeight = totalHeight - tasksHeight;
 
                                 var itemWidth = tasksHeight / 5;
-                                
-                                return new Column(
-                                    children: new List<Widget>()
-                                    {
-                                        new Container(
-                                            height: tasksHeight,
-                                            color: Colors.black,
-                                            // TODO: 封装成 Tasks
-                                            child: new Tasks(itemWidth)
-                                        ),
-                                        new Container(
-                                            padding:EdgeInsets.symmetric(horizontal:Habits.Padding / 2,vertical:Habits.Padding / 2),
-                                            color: Colors.black,
-                                            height: habitsHeight,
-                                            child: new Habits())
-                                    }
-                                );
-                            })
+
+                                var habitsCount = model.Habits.Count;
+
+                                if (habitsCount == 0)
+                                {
+                                    return new CustomScrollView(
+                                        physics:new NeverScrollableScrollPhysics(),
+                                        slivers:new List<Widget>()
+                                        {
+                                            new SliverToBoxAdapter(child:
+                                                new Container(
+                                                    decoration:new BoxDecoration(
+                                                        color:Theme.of(context).backgroundColor
+                                                        ),
+                                                    height:tasksHeight,
+                                                    alignment:Alignment.center,
+                                                    child:new Text(
+                                                        data:"WE BECOME \nWHAT WE \nREPEATEDLY DO.",
+                                                        textAlign:TextAlign.center,
+                                                        style:new TextStyle(
+                                                            fontSize:24,
+                                                            color:Colors.white,
+                                                            height:1.2f
+                                                        )
+                                                        )
+                                                    )
+                                                ),
+                                            new SliverToBoxAdapter(
+                                                child: new Habits(habitsHeight)),
+                                        }
+                                    );
+                                }
+                                else
+                                {
+                                    return new CustomScrollView(
+                                        physics:new NeverScrollableScrollPhysics(),
+                                        slivers:new List<Widget>()
+                                        {
+                                            new SliverToBoxAdapter(
+                                                child:new Tasks()
+                                                ),
+                                            new SliverToBoxAdapter(
+                                                child: new Habits(habitsHeight)
+                                            )
+                                        }
+                                    );
+                                }
+                            }
                         )
                     );
                 }
-            );
+            ));
         }
     }
 }

@@ -1,5 +1,9 @@
 using System;
+using System.Linq;
 using com.unity.uiwidgets.Runtime.rendering;
+using Unity.UIWidgets.foundation;
+using Unity.UIWidgets.material;
+using Unity.UIWidgets.painting;
 using Unity.UIWidgets.Redux;
 using Unity.UIWidgets.widgets;
 using UnityEngine;
@@ -8,12 +12,13 @@ namespace HabitApp
 {
     public class Tasks :StatelessWidget
     {
-        private float mItemWidth;
 
-        public Tasks(float itemWidth)
-        {
-            mItemWidth = itemWidth;
-        }
+        private const float PADDING = 16.0f;
+
+        private const int MONTH_COUNT = 25;
+
+        private const int SEASON_COUNT = 81;
+        
 
         public override Widget build(BuildContext context)
         {
@@ -21,40 +26,62 @@ namespace HabitApp
                 converter: state => state,
                 builder: (buildContext, model, dispatcher) =>
                 {
-
-                    if (model.SelectedHabit != null)
+                    var tasks = model.Tasks;
+                    
+                    if (tasks.isEmpty())
                     {
-
-                        var tasks = model.SelectedHabit.Tasks;
-
-
-                        var totalDays = (DateTime.Now - model.SelectedHabit.CreateAt).TotalDays;
-                        var dayth = (int) totalDays + 1;
-
-
-                        return GridView.builder(
-                            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 5
-                            ),
-                            itemBuilder: (context3, index) =>
-                            {
-                                var task = tasks[index];
-                                var isToday = dayth == task.Seq;
-                                var editable = dayth == task.Seq || dayth == task.Seq + 1;
-
-                                return new Task(task, () =>
-                                {
-                                    Debug.Log("Task Clicked");
-
-                                    dispatcher.dispatch(new ChangeTaskStatusAction(task));
-
-                                }, mItemWidth, isToday, editable);
-                            },
-                            itemCount: 25);
+                        return new Container();
                     }
                     else
                     {
-                        return new Container();
+
+                        int columCount = 0;
+                        
+                        if (tasks.Count == MONTH_COUNT)
+                        {
+                            columCount = (int)Math.Sqrt(MONTH_COUNT);
+                        } else if (tasks.Count == SEASON_COUNT)
+                        {
+                            columCount = (int) Math.Sqrt(SEASON_COUNT);
+                        }
+                        
+
+                        var screenWidth = MediaQuery.of(context).size.width;
+                        var height = screenWidth;
+                        var itemWidth = ((screenWidth - PADDING * 2) - (columCount - 1) * PADDING) /
+                                        columCount;
+                        
+                        
+
+                        
+                        return new Container(
+                            height: height,
+                            width:screenWidth,
+                            padding:EdgeInsets.only(
+                                left:PADDING / 2,
+                                top:PADDING / 2,
+                                right:PADDING / 2,
+                                bottom:0
+                                ),
+                            decoration: new BoxDecoration(
+                                color: Theme.of(context).backgroundColor
+                            ),
+                            child: GridView.builder(
+                                gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: columCount
+                                ),
+                                itemBuilder: (context3, index) =>
+                                {
+                                    var task = tasks[index];
+
+                                    return new Task(task, () =>
+                                    {
+                                        Debug.Log("Task Clicked");
+
+                                        dispatcher.dispatch(new ChangeTaskStatusAction(task));
+                                    }, itemWidth);
+                                },
+                                itemCount: 25));
                     }
                 }
             );

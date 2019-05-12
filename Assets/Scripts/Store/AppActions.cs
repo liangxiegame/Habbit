@@ -2,11 +2,11 @@ namespace HabitApp
 {
     public class SelectHabitAction
     {
-        public int HabitIndex;
+        public HabitData Habit;
 
-        public SelectHabitAction(int habitIndex)
+        public SelectHabitAction(HabitData habit)
         {
-            HabitIndex = habitIndex;
+            Habit = habit;
         }
     }
 
@@ -14,7 +14,7 @@ namespace HabitApp
     public class ChangeTaskStatusAction
     {
         public TaskData TaskData;
-
+        
         public ChangeTaskStatusAction(TaskData taskData)
         {
             TaskData = taskData;

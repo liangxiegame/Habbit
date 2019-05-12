@@ -17,7 +17,7 @@ namespace HabitApp
                 var state= store.getState();
                 
                 var jsonContent = JsonConvert.SerializeObject(state);
-                PlayerPrefs.SetString("SAVE_MIDDLEWARE",jsonContent);
+                PlayerPrefs.SetString("HABBIT",jsonContent);
                 
                 return retValue;
             });

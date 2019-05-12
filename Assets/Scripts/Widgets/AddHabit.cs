@@ -10,6 +10,7 @@ namespace HabitApp
     public class AddHabit : StatelessWidget
     {
         private float mHabitWidth;
+        public const float HabitHeight = 50f;
 
         public AddHabit(float habitWidth)
         {
@@ -17,7 +18,7 @@ namespace HabitApp
         }
 
         public override Widget build(BuildContext context)
-        { 
+        {
             return new GestureDetector(
                 onTap: () =>
                 {
@@ -25,25 +26,33 @@ namespace HabitApp
                         builder: (context3 => { return new HabitEditor(); })
                     ));
                 },
-                child: new Container(
-                    width: mHabitWidth,
-                    height:50 + Habits.Padding,
-                    padding: EdgeInsets.only(left: 5, top: 3, bottom: 2, right: 5),
-                    margin: EdgeInsets.symmetric(horizontal: Habits.Padding / 2, vertical: Habits.Padding / 2),
-                    decoration: new BoxDecoration(
-                        color: Colors.white10,
-                        borderRadius: BorderRadius.all(Radius.circular(4))
-                    ),
-                    alignment: Alignment.center,
-                    child: new Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: new List<Widget>()
-                        {
-                            new Text("创建习惯",
-                                style: new TextStyle(color: Colors.white, fontSize: 16))
-                        }
-                    )
+                child: new LayoutBuilder(
+                    builder:((buildContext, constraints) =>
+                    {
+                        return new Container(
+                            constraints:BoxConstraints.tightFor(width:mHabitWidth),
+                            height: HabitHeight,
+                            padding: EdgeInsets.only(left: 5, top: 3, bottom: 2, right: 5),
+                            margin: EdgeInsets.symmetric(horizontal: Habits.Padding / 2, vertical: Habits.VerticalPadding / 2),
+                            decoration: new BoxDecoration(
+                                color: Colors.white10,
+                                borderRadius: BorderRadius.all(Radius.circular(4))
+                            ),
+                            alignment: Alignment.center,
+                            child: new Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: new List<Widget>()
+                                {
+                                    new Text("创建习惯",
+                                        style: new TextStyle(color: Colors.white, fontSize: 16))
+                                }
+                            )
+                        );
+                    })
+                    
                 )
+                
+
             );
         }
     }
