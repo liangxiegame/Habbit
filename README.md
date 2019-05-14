@@ -12,6 +12,6 @@ Habbit 是一个习惯跟踪 App，flutter 版本已经在 [AppStore](https://it
 * UIWidgets
 
 ## 课程
-此仓库为 课程 《UIWidgets 案例精讲：简易习惯养成 App ---《Habbit》 》 的代码工程。
+此仓库为 课程 [《UIWidgets 案例精讲：简易习惯养成 App ---《Habbit》 》](http://www.sikiedu.com/course/439/summary) 的代码工程。
 
 如果是 Unity 初学者和新手或者想支持凉鞋的童鞋建议参加[《A 计划》](http://www.sikiedu.com/classroom/5/introduction)并学习此课程，如果是有经验的童鞋直接看仓库代码即可。
